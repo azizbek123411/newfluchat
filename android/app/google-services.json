@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "315805694927",
+    "project_id": "new-fluchat",
+    "storage_bucket": "new-fluchat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315805694927:android:587f24f0241c1013ec70ba",
+        "android_client_info": {
+          "package_name": "com.example.newfluchat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMUkNFJ_hN-w2hIL1RP4jkrN7fR9rlAZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
