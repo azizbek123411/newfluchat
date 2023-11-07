@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:newfluchat/constants/main_color.dart';
 import 'package:newfluchat/pages/home_page/side_bar.dart';
 
+import 'home_chat.dart';
+
 class HomePage extends StatefulWidget {
   static const String id = 'home';
 
@@ -16,6 +18,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+            )
+          ],
           backgroundColor: mainColor,
           title: const Text(
             'FluChat',
@@ -30,45 +41,5 @@ class _HomePageState extends State<HomePage> {
         body: ListView.builder(itemBuilder: (context, index) {
           return const HomeChat();
         }));
-  }
-}
-
-class HomeChat extends StatelessWidget {
-  const HomeChat({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 8,
-        ),
-        ListTile(
-          leading: Container(
-            height: 80,
-            width: 60,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                border: Border.all(color: Colors.grey, width: 2)),
-          ),
-          title: const Text(
-            'Abdulhafiz Yusupov',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-          ),
-          subtitle: const Text(
-            "Qachon ko'rishamiz?",
-            style: TextStyle(color: Colors.grey),
-          ),
-          trailing: const Column(
-            children: [
-              Text(
-                '13:31',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
   }
 }
