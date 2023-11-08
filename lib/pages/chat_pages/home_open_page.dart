@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:newfluchat/constants/main_color.dart';
+import 'package:newfluchat/models/message_model.dart';
 import 'package:newfluchat/widgets/message_screen.dart';
+
+import '../../utils/app-id-generator.dart';
 
 class OpenPage extends StatefulWidget {
   static const String id = 'open_page';
@@ -15,8 +18,28 @@ class OpenPage extends StatefulWidget {
 }
 
 class _OpenPageState extends State<OpenPage> {
-  TextEditingController messageController = TextEditingController();
-  void messageSend(){}
+  final messageController = TextEditingController();
+  List<MessageModel> allMessages = [];
+  String myID='1';
+
+  void messageSend() {
+
+    if (messageController.text.trim().isNotEmpty) {
+      MessageModel messageModel = MessageModel(
+          id: Token.id(),
+          senderID: myID,
+          sentTime: Token.now() ,
+          read: false,
+          image: 'image',
+          file: 'file',
+          message: messageController.toString().trim()
+      );
+      setState(() {
+        allMessages.add(messageModel);
+      });
+    }
+    messageController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,15 +100,16 @@ class _OpenPageState extends State<OpenPage> {
         children: [
           Expanded(
             child: ListView.builder(
-                itemCount: 33,
+                itemCount: allMessages.length,
                 itemBuilder: (context, index) {
                   return MessageScreen(
-                    byMe: index % 2 == 0,
+                    messageModel: allMessages[index],
+                    myID: myID,
                   );
                 }),
           ),
           Container(
-            decoration:const BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
             ),
             width: double.infinity,
@@ -94,16 +118,18 @@ class _OpenPageState extends State<OpenPage> {
               child: TextField(
                 controller: messageController,
                 decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(10),
-                    hintText: 'Enter message',
-                    border: InputBorder.none,
-                    hintStyle: const TextStyle(fontSize: 18),
-                    suffixIcon: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.send,
-                          color: mainColor,
-                        ))),
+                  contentPadding: const EdgeInsets.all(10),
+                  hintText: 'Enter message',
+                  border: InputBorder.none,
+                  hintStyle: const TextStyle(fontSize: 18),
+                  suffixIcon: IconButton(
+                    onPressed: messageSend,
+                    icon: const Icon(
+                      Icons.send,
+                      color: mainColor,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),

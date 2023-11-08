@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:newfluchat/constants/main_color.dart';
+import 'package:intl/intl.dart';
+import 'package:newfluchat/models/message_model.dart';
 
 class MessageScreen extends StatelessWidget {
-  bool byMe;
+  final MessageModel messageModel;
+  final String myID;
 
-  MessageScreen({super.key, required this.byMe});
+  const MessageScreen(
+      {super.key, required this.myID, required this.messageModel});
 
   @override
   Widget build(BuildContext context) {
+    final byMe = messageModel.senderID == myID;
     return Container(
       padding: const EdgeInsets.all(10),
       margin: EdgeInsets.only(
@@ -27,10 +31,11 @@ class MessageScreen extends StatelessWidget {
         ),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
-            'fasffaafasffaafasffaafasffaafasffaafasffaafasffaafasffaafasffaafasffa',
-            style: TextStyle(
+          Text(
+            messageModel.toString(),
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 17,
             ),
@@ -42,9 +47,11 @@ class MessageScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const Text(
-                '22:10',
-                style: TextStyle(
+              Text(
+                DateFormat('hh:mm').format(
+                  DateTime.parse(messageModel.sentTime),
+                ),
+                style: const TextStyle(
                   color: Colors.black38,
                   fontWeight: FontWeight.w500,
                 ),
