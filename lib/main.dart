@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:newfluchat/pages/authentication/sign_in.dart';
 import 'package:newfluchat/pages/authentication/sing_up.dart';
 import 'package:newfluchat/pages/chat_pages/home_open_page.dart';
+import 'package:newfluchat/pages/chat_pages/new_chat_page.dart';
 import 'package:newfluchat/pages/home_page/home_page.dart';
 import 'package:newfluchat/pages/user_info_page.dart';
 import 'package:newfluchat/services/auth_service/firebase_atuh_service.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
         SignUp.id:(context)=>const SignUp(),
         SignIn.id:(context)=>const SignIn(),
         UserInfoPage.id:(context)=>const UserInfoPage(),
-        OpenPage.id:(context)=> const OpenPage(),
+        OpenPage.id:(context)=>  OpenPage(),
+        NewChatPage.id:(context)=> const NewChatPage(),
     },
     );
   }

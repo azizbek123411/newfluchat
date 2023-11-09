@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:newfluchat/constants/main_color.dart';
+import 'package:newfluchat/models/chat_model.dart';
 import 'package:newfluchat/models/message_model.dart';
+import 'package:newfluchat/models/user_model.dart';
 import 'package:newfluchat/widgets/message_screen.dart';
 
 import '../../utils/app-id-generator.dart';
 
 class OpenPage extends StatefulWidget {
+  final UserModel? userModel;
+  final ChatModel? chatModel;
   static const String id = 'open_page';
 
   const OpenPage({
     super.key,
+    this.chatModel,
+    this.userModel,
   });
 
   @override
@@ -19,21 +26,19 @@ class OpenPage extends StatefulWidget {
 
 class _OpenPageState extends State<OpenPage> {
   final messageController = TextEditingController();
-  List<MessageModel> allMessages = [];
-  String myID='1';
+  List<Message> allMessages = [];
+  String myID = '1';
 
   void messageSend() {
-
     if (messageController.text.trim().isNotEmpty) {
-      MessageModel messageModel = MessageModel(
+      Message messageModel = Message(
           id: Token.id(),
           senderID: myID,
-          sentTime: Token.now() ,
+          sentTime: Token.now(),
           read: false,
           image: 'image',
           file: 'file',
-          message: messageController.toString().trim()
-      );
+          message: messageController.toString().trim());
       setState(() {
         allMessages.add(messageModel);
       });
@@ -68,20 +73,23 @@ class _OpenPageState extends State<OpenPage> {
             const SizedBox(
               width: 10,
             ),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Abdulhafiz Yusupov',
-                  style: TextStyle(
+                  "${widget.userModel?.name} ${widget.userModel?.surname}",
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
                     fontSize: 19,
                   ),
                 ),
                 Text(
-                  'Online',
-                  style: TextStyle(color: Colors.white54, fontSize: 17),
+                  widget.userModel!.online
+                      ? 'Online'
+                      : DateFormat("hh:mm")
+                          .format(DateTime.parse(widget.userModel!.lastSeen)),
+                  style: const TextStyle(color: Colors.white54, fontSize: 17),
                 ),
               ],
             )

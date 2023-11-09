@@ -40,6 +40,14 @@ class _HomePageState extends State<HomePage> {
         drawer: const Sidebar(),
         body: ListView.builder(itemBuilder: (context, index) {
           return const HomeChat();
-        }));
+        }),
+    floatingActionButton: FloatingActionButton(
+      backgroundColor: mainColor,
+      onPressed: (){
+        Navigator.pushNamed(context, 'newchat');
+      },
+      child: const Icon(Icons.add,color: Colors.white,),
+    ),
+    );
   }
 }

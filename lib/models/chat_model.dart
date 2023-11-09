@@ -8,7 +8,7 @@ class ChatModel {
   UserModel user2;
   String id;
   String chatCreatedTime;
-  List<MessageModel> messages;
+  List<Message> messages;
 
   ChatModel({
     required this.id,
@@ -19,11 +19,11 @@ class ChatModel {
   });
 
   factory ChatModel.fromJson(Map<String, dynamic> json) {
-    List <MessageModel>messageAll=[];
+    List <Message>messageAll=[];
 final list=json['message'];
 for(final item in list){
  try {
-        messageAll.add(MessageModel.fromMap(item));
+        messageAll.add(Message.fromMap(item));
       }catch(error){
    log('Error in parsing message:',error: error);
  }

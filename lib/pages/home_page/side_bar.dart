@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:newfluchat/constants/main_color.dart';
 import 'package:newfluchat/services/rtdb_service/rtdb_service.dart';
+
 class Sidebar extends StatelessWidget {
   const Sidebar({super.key});
 
@@ -10,9 +11,9 @@ class Sidebar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: FutureBuilder(
-        future:RealDbService().get(),
-        builder: (context,snapshot){
-          if(snapshot.connectionState==ConnectionState.waiting){
+        future: RealDbService().get(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: SizedBox(
                 height: 40,
@@ -20,14 +21,14 @@ class Sidebar extends StatelessWidget {
                 child: CircularProgressIndicator(),
               ),
             );
-          }else if(snapshot.hasError){
+          } else if (snapshot.hasError) {
             return const SizedBox();
-          }else{
-            final user=snapshot.hasData;
+          } else {
+            final user = snapshot.hasData;
             log(user.toString());
             return ListView(
               children: [
-                 DrawerHeader(
+                DrawerHeader(
                   padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
                     color: mainColor,
@@ -37,26 +38,30 @@ class Sidebar extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height:50,
-                        width:50,
+                        height: 50,
+                        width: 50,
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.white),
                           borderRadius: BorderRadius.circular(100),
                         ),
                       ),
-                     const  SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
-                      const Text('drawer',style: TextStyle(color: Colors.white,fontSize: 18),),
+                      const Text(
+                        'drawer',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
                     ],
-                  ),),
+                  ),
+                ),
                 ListTile(
-                  onTap: (){},
+                  onTap: () {},
                   leading: const Icon(Icons.settings),
                   title: const Text('Settings'),
                 ),
                 ListTile(
-                  onTap: (){},
+                  onTap: () {},
                   leading: const Icon(Icons.heart_broken_sharp),
                   title: const Text('Brokent heart'),
                 ),

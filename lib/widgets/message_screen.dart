@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:newfluchat/models/message_model.dart';
 
 class MessageScreen extends StatelessWidget {
-  final MessageModel messageModel;
+  final Message messageModel;
   final String myID;
 
   const MessageScreen(
